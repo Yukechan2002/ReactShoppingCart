@@ -3,7 +3,33 @@ import Cart from "./component/Cart";
 import React, { Component } from "react";
 
 export class App extends Component {
+  state = {
+    cartItems: [],
+  };
+
+  handleAddToCart = (item) => {
+    // Check if item is already in the cart
+    const itemIndex = this.state.cartItems.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
+
+    if (itemIndex === -1) {
+      // Item not in cart, add it
+      this.setState((prevState) => ({
+        cartItems: [...prevState.cartItems, item],
+      }));
+    } else {
+      // Item already in cart, remove it
+      const updatedCartItems = [...this.state.cartItems];
+      updatedCartItems.splice(itemIndex, 1);
+      this.setState({
+        cartItems: updatedCartItems,
+      });
+    }
+  };
+
   render() {
+    const cartCount = this.state.cartItems.length;
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -78,7 +104,7 @@ export class App extends Component {
                   <i className="bi-cart-fill me-1"></i>
                   Cart
                   <span className="badge bg-dark text-white ms-1 rounded-pill">
-                    0
+                    {cartCount}
                   </span>
                 </button>
               </form>
@@ -91,7 +117,7 @@ export class App extends Component {
             <div className="text-center text-white">
               <h1 className="display-4 fw-bolder">Shop in style</h1>
               <p className="lead fw-normal text-white-50 mb-0">
-                With this shop homepage template
+                With this shop hompeage template
               </p>
             </div>
           </div>
@@ -126,10 +152,7 @@ export class App extends Component {
               </div>
               <div className="col mb-5">
                 <div className="card h-100">
-                  <div
-                    className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
-                  >
+                  <div className="badge bg-dark text-white position-absolute">
                     Sale
                   </div>
 
@@ -156,21 +179,18 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    item={{ id: 1 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 1
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
                 <div className="card h-100">
-                  <div
-                    className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
-                  >
+                  <div className="badge bg-dark text-white position-absolute">
                     Sale
                   </div>
 
@@ -190,13 +210,14 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    Add
+                    item={{ id: 2 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 2
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
@@ -221,21 +242,19 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    Add
+                    item={{ id: 3 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 3
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
                 <div className="card h-100">
-                  <div
-                    className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
-                  >
+                  <div className="badge bg-dark text-white position-absolute">
                     Sale
                   </div>
 
@@ -255,13 +274,14 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    Add
+                    item={{ id: 4 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 4
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
@@ -279,21 +299,19 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        View options
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    Add
+                    item={{ id: 5 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 5
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
                 <div className="card h-100">
-                  <div
-                    className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
-                  >
+                  <div className="badge bg-dark text-white position-absolute">
                     Sale
                   </div>
 
@@ -320,13 +338,13 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    item={{ id: 6 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 6
+                    )}
+                  />
                 </div>
               </div>
               <div className="col mb-5">
@@ -351,13 +369,13 @@ export class App extends Component {
                     </div>
                   </div>
 
-                  <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center">
-                      <a className="btn btn-outline-dark mt-auto" href="#">
-                        Add to cart
-                      </a>
-                    </div>
-                  </div>
+                  <Cart
+                    item={{ id: 7 }}
+                    addToCart={this.handleAddToCart}
+                    isInCart={this.state.cartItems.some(
+                      (item) => item.id === 7
+                    )}
+                  />
                 </div>
               </div>
             </div>
